@@ -10,34 +10,34 @@ To write a python program for creating Chat using TCP Sockets Links.
 ## PROGRAM
 ### Client
 ```
-import socket
-s=socket.socket()
-s.bind(('localhost',9000))
-s.listen(5)
-c,addr=s.accept()
-address={"6A:08:AA:C2":"192.168.1.100","8A:BC:E3:FA":"192.168.1.99"};
-while True:
-    ip=c.recv(1024).decode()
-    try:
-        c.send(address[ip].encode())
-    except KeyError:
-        c.send("Not Found".encode())
+import socket 
+s=socket.socket() 
+s.connect(('localhost',8000)) 
+while True: 
+   msg=input("Client > ") 
+   s.send(msg.encode()) 
+   print("Server > ",s.recv(1024).decode())
 ```
 ### Server
 ```
-import socket
-s=socket.socket()
-s.connect(('localhost',9000))
-while True:
-    ip=input("Enter MAC Address : ")
-    s.send(ip.encode())
-    print("Logical Address",s.recv(1024).decode())
+import socket 
+s=socket.socket() 
+s.bind(('localhost',8000)) 
+s.listen(5) 
+c,addr=s.accept() 
+while True: 
+            ClientMessage=c.recv(1024).decode() 
+            print("Client > ",ClientMessage) 
+            msg=input("Server > ") 
+            c.send(msg.encode())
 ```
 ## OUPUT
 ### CLient
-![Screenshot 2024-03-21 153833](https://github.com/s-adhithya/3b_CHAT_USING_TCP_SOCKETS/assets/113497423/871169ba-10c4-4660-adba-2731158c0ede)
+![323145564-859c9047-79f8-4173-8415-7e09c238c26a](https://github.com/s-adhithya/3b_CHAT_USING_TCP_SOCKETS/assets/113497423/64b977c5-c0aa-42fd-b713-969ac1960fd4)
+
 ### Server
-![Screenshot 2024-03-21 153845](https://github.com/s-adhithya/3b_CHAT_USING_TCP_SOCKETS/assets/113497423/a62915d1-61c9-412a-bada-1eccc98bab8d)
+![323145617-7c2d13ce-8eb7-48b6-9e5f-77b3d0f920ad](https://github.com/s-adhithya/3b_CHAT_USING_TCP_SOCKETS/assets/113497423/9a25a5c5-6b15-42e5-93e6-eb783a623ac4)
+
 
 ## RESULT
 Thus, the python program for creating Chat using TCP Sockets Links was successfully 
